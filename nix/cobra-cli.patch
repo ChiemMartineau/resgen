@@ -1,0 +1,12 @@
+diff --git a/cmd/root.go b/cmd/root.go
+index b44c2e7..677e252 100644
+--- a/cmd/root.go
++++ b/cmd/root.go
+@@ -71,6 +71,7 @@ func initConfig() {
+ 		viper.SetConfigName(".cobra")
+ 	}
+ 
++	viper.SetEnvPrefix("cobra_cli")
+ 	viper.AutomaticEnv()
+ 
+ 	if err := viper.ReadInConfig(); err == nil {
