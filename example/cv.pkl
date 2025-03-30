@@ -1,0 +1,4 @@
+amends "https://raw.githubusercontent.com/ChiemMartineau/resgen/refs/heads/main/pkl/AppConfig.pkl"
+
+host = "localhost"
+port = 1 + 1000

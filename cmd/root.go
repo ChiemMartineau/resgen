@@ -25,7 +25,7 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "resgen",
+	Use:   "resgen [path]",
 	Short: "A brief description of your application",
 	Long: `A longer description that spans multiple lines and likely contains
 examples and usage of using your application. For example:
@@ -33,28 +33,26 @@ examples and usage of using your application. For example:
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
+	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Hello world")
-
-		// cfg, err := gen.AppConfig.Loa
-		cfg, err := pkl.LoadFromPath(cmd.Context(), "./hello.pkl")
-
-		// gen.LoadFromPath()
+		cfg, err := pkl.LoadFromPath(cmd.Context(), args[0])
 
 		if err != nil {
-			panic(err)
+			fmt.Fprint(os.Stderr, err)
+			os.Exit(1)
 		}
+
 		fmt.Printf("I'm running on host %s:%d\n", cfg.Host, cfg.Port)
 	},
 }
 
 func init() {
+
 }
 
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
-		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
 }
