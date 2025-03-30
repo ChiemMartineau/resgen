@@ -1,4 +1,0 @@
-amends "./pkl/AppConfig.pkl"
-
-host = "Test"
-port = 3 + 3
