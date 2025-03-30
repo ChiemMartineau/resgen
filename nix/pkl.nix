@@ -1,10 +1,4 @@
-{
-  stdenv,
-  lib,
-  fetchurl,
-  autoPatchelfHook,
-  zlib,
-}:
+{ stdenv, lib, fetchurl, autoPatchelfHook, zlib, }:
 let
   platforms = {
     "x86_64-linux" = {
@@ -24,22 +18,20 @@ let
       sha256 = "1q0gn53qbfa2xvz1n8sf9gv9cfj67zkqk77rdz4vazh6lzddx4yk";
     };
   };
-in
-stdenv.mkDerivation rec {
+in stdenv.mkDerivation rec {
   pname = "pkl";
   version = "0.28.1";
 
-  src = fetchurl (
-    with platforms.${stdenv.hostPlatform.system};
-    {
-      url = "https://github.com/apple/pkl/releases/download/${version}/pkl-${name}";
-      inherit sha256;
-    }
-  );
+  src = fetchurl (with platforms.${stdenv.hostPlatform.system}; {
+    url =
+      "https://github.com/apple/pkl/releases/download/${version}/pkl-${name}";
+    inherit sha256;
+  });
 
   dontUnpack = true;
 
-  nativeBuildInputs = [ ] ++ lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
+  nativeBuildInputs = [ ]
+    ++ lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
   buildInputs = [ ] ++ lib.optionals stdenv.hostPlatform.isLinux [ zlib ];
 
   installPhase = ''
@@ -50,7 +42,8 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     homepage = "https://pkl-lang.org";
-    description = "A configuration as code language with rich validation and tooling. ";
+    description =
+      "A configuration as code language with rich validation and tooling. ";
     platforms = builtins.attrNames platforms;
     maintainers = with maintainers; [ samuel-martineau ];
     license = licenses.asl20;
