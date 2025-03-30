@@ -1,4 +1,5 @@
 amends "https://raw.githubusercontent.com/ChiemMartineau/resgen/refs/heads/main/pkl/AppConfig.pkl"
 
-host = "localhost"
-port = 1 + 1000
+host = "google.ca"
+
+port = 1 * 3 + 5
