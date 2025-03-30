@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/ChiemMartineau/resgen/pkl"
 	"github.com/spf13/cobra"
 )
 
@@ -34,6 +35,16 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Hello world")
+
+		// cfg, err := gen.AppConfig.Loa
+		cfg, err := pkl.LoadFromPath(cmd.Context(), "./hello.pkl")
+
+		// gen.LoadFromPath()
+
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf("I'm running on host %s:%d\n", cfg.Host, cfg.Port)
 	},
 }
 
