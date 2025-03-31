@@ -17,9 +17,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package cmd
 
 import (
-	"fmt"
-
-	"github.com/ChiemMartineau/resgen/pkl"
 	"github.com/spf13/cobra"
 )
 
@@ -27,15 +24,6 @@ var gentxtCmd = &cobra.Command{
 	Use:  "gentxt [path]",
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		path := args[0]
-
-		data, err := pkl.LoadFromPath(cmd.Context(), path)
-		if err != nil {
-			return err
-		}
-
-		fmt.Printf("%#v\n", data)
-
 		return nil
 	},
 }
