@@ -1,5 +1,5 @@
 /*
-Copyright © 2025 Samuel Martineau and Dan Chiem
+Copyright © 2025 Samuel Martineau <samuel.martineau@uwaterloo.ca> and Dan Chiem <dchiem@uwaterloo.ca>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,23 +17,29 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package cmd
 
 import (
-	"os"
+	"fmt"
 
+	"github.com/ChiemMartineau/resgen/pkl"
 	"github.com/spf13/cobra"
 )
 
-var rootCmd = &cobra.Command{
-	Use:          "resgen",
-	SilenceUsage: true,
+var gentxtCmd = &cobra.Command{
+	Use:  "gentxt [path]",
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		path := args[0]
+
+		data, err := pkl.LoadFromPath(cmd.Context(), path)
+		if err != nil {
+			return err
+		}
+
+		fmt.Printf("%#v\n", data)
+
+		return nil
+	},
 }
 
 func init() {
-
-}
-
-func Execute() {
-	err := rootCmd.Execute()
-	if err != nil {
-		os.Exit(1)
-	}
+	rootCmd.AddCommand(gentxtCmd)
 }

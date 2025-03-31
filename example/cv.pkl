@@ -1,5 +1,16 @@
-amends "https://raw.githubusercontent.com/ChiemMartineau/resgen/refs/heads/main/pkl/AppConfig.pkl"
+amends "../pkl/Resume.pkl"
 
-host = "google.ca"
+firstName = "Samuel"
+lastName = "Martineau"
 
-port = 1 * 3 + 5
+jobs {
+  new {
+    title = "Software Developper at Xata"
+    startDate = "2024-01-01"
+  }
+
+  new {
+    title = "Wolfram Student Ambassador"
+    startDate = "2024-02-02"
+  }
+}

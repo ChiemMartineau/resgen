@@ -1,9 +1,14 @@
 //go:generate pkl-gen-go pkl/AppConfig.pkl
 @go.Package { name = "github.com/ChiemMartineau/resgen/pkl" }
-module chiemmartineau.resgen.AppConfig
+module chiemmartineau.resgen.Resume
 
 import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.9.0#/go.pkl" 
 
-host: String
+class Job {
+    title: String?
+    startDate: String
+}
 
-port: UInt16
+firstName: String
+lastName: String
+jobs: Listing<Job>

@@ -15,7 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-//go:generate pkl-gen-go pkl/AppConfig.pkl
+//go:generate pkl-gen-go pkl/Resume.pkl
 
 package main
 

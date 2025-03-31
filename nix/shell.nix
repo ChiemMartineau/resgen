@@ -9,5 +9,5 @@ in pkgs.mkShell {
       (callPackage ./pkl.nix { })
       (callPackage ./pkl-gen-go.nix { })
     ] ++ (pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux
-      (with pkgs; [ chromium ]));
+      (with pkgs; [ chromium helix ]));
 }
