@@ -17,14 +17,54 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package cmd
 
 import (
+	"bytes"
+	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/yuin/goldmark"
+	"gopkg.in/yaml.v3"
 )
 
+type LocalizedString map[string]string
+
+func (s *LocalizedString) UnmarshalYAML(value *yaml.Node) error {
+	switch value.Kind {
+	case yaml.ScalarNode:
+		// *s = []string{value.Value}
+	case yaml.SequenceNode:
+		// var list []string
+		// for _, node := range value.Content {
+		// 	list = append(list, node.Value)
+		// }
+		// *s = list
+	default:
+		return fmt.Errorf("unsupported YAML type for LocalizedString")
+	}
+	return nil
+}
+
 var rootCmd = &cobra.Command{
-	Use:          "resgen",
+	Use:          "resgen [path]",
 	SilenceUsage: true,
+	Args:         cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		path := args[0]
+
+		source, err := os.ReadFile(path)
+		if err != nil {
+			return err
+		}
+
+		var buf bytes.Buffer
+		if err := goldmark.Convert(source, &buf); err != nil {
+			return err
+		}
+
+		fmt.Println(buf.String())
+
+		return nil
+	},
 }
 
 func init() {

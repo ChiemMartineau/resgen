@@ -29,14 +29,7 @@ import (
 
 // genpdfCmd represents the genpdf command
 var genpdfCmd = &cobra.Command{
-	Use:   "genpdf",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Use: "genpdf",
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx, cancel := chromedp.NewContext(cmd.Context(), chromedp.WithLogf(log.Printf))
 		defer cancel()
