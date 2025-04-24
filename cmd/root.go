@@ -17,63 +17,68 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package cmd
 
 import (
-	"bytes"
 	"fmt"
+	"log"
 	"os"
+	"path/filepath"
 
+	"github.com/ChiemMartineau/resgen/loader"
+	"github.com/goccy/go-yaml/printer"
 	"github.com/spf13/cobra"
-	"github.com/yuin/goldmark"
-	"gopkg.in/yaml.v3"
+	"golang.org/x/term"
 )
 
-type LocalizedString map[string]string
-
-func (s *LocalizedString) UnmarshalYAML(value *yaml.Node) error {
-	switch value.Kind {
-	case yaml.ScalarNode:
-		// *s = []string{value.Value}
-	case yaml.SequenceNode:
-		// var list []string
-		// for _, node := range value.Content {
-		// 	list = append(list, node.Value)
-		// }
-		// *s = list
-	default:
-		return fmt.Errorf("unsupported YAML type for LocalizedString")
-	}
-	return nil
-}
-
 var rootCmd = &cobra.Command{
-	Use:          "resgen [path]",
-	SilenceUsage: true,
-	Args:         cobra.ExactArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		path := args[0]
+	Use:  "resgen [path]",
+	Args: cobra.RangeArgs(0, 1),
+	Run: func(cmd *cobra.Command, args []string) {
+		rootPath := "."
 
-		source, err := os.ReadFile(path)
+		if len(args) > 0 {
+			rootPath = args[0]
+		}
+
+		rootPath, err := filepath.Abs(rootPath)
+
 		if err != nil {
-			return err
+			log.Fatal(SmartFormatError(err))
 		}
 
-		var buf bytes.Buffer
-		if err := goldmark.Convert(source, &buf); err != nil {
-			return err
+		data, err := loader.LoadData(rootPath)
+		if err != nil {
+			log.Fatal(SmartFormatError(err))
 		}
 
-		fmt.Println(buf.String())
-
-		return nil
+		fmt.Printf("%#v\n", data)
 	},
 }
 
 func init() {
-
+	log.SetFlags(0)
 }
 
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
+	}
+}
+
+func SmartFormatError(err error) string {
+	if term.IsTerminal(int(os.Stderr.Fd())) {
+		return PrettyFormatError(err)
+	} else {
+		return err.Error()
+	}
+}
+
+func PrettyFormatError(err error) string {
+	switch err := err.(type) {
+	case loader.YamlError:
+		var pp printer.Printer
+		src := pp.PrintErrorToken(err.YamlError.GetToken(), true)
+		return fmt.Sprintf("%s%s%s\n%s", ColourRedBold, err.Error(), ColourReset, src)
+	default:
+		return fmt.Sprintf("%s%s%s", ColourRedBold, err.Error(), ColourReset)
 	}
 }

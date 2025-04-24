@@ -1,6 +1,6 @@
 ---
-start: 2020
-end: 2024
+start: 2006-01-05
+end: 2024-12-04
 title: Non Localized String
 program:
   - In French
@@ -8,8 +8,4 @@ program:
 link: https://smartineau.me
 ---
 
-In French
-
----
-
-En anglais
+Les deux
