@@ -3,7 +3,7 @@ start: 2006-01-05
 end: 2024-12-04
 location: Montreal
 institution: Non Localized String
-program:
+degree:
   - In French
   - En anglais
 grade: 100%

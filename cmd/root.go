@@ -17,13 +17,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package cmd
 
 import (
-	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
 
 	"github.com/ChiemMartineau/resgen/loader"
+	"github.com/ChiemMartineau/resgen/renderer"
 	"github.com/ChiemMartineau/resgen/utils"
 	"github.com/spf13/cobra"
 )
@@ -48,11 +47,13 @@ var rootCmd = &cobra.Command{
 			log.Fatal(utils.SmartFormatError(err))
 		}
 
-		json, err := json.MarshalIndent(data, "", "\t")
-		if err != nil {
-			log.Fatal(utils.SmartFormatError(err))
-		}
-		fmt.Printf("%s\n", json)
+		// json, err := json.MarshalIndent(data, "", "\t")
+		// if err != nil {
+		// 	log.Fatal(utils.SmartFormatError(err))
+		// }
+		// fmt.Printf("%s\n", json)
+
+		renderer.Text("./templates/resume/text.tmpl", data)
 	},
 }
 

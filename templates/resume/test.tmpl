@@ -1,0 +1,36 @@
+*** EDUCATION ***
+{{ range .Education }}
+Institution: {{ .Institution.en }}
+Location: {{ .Location.en }}
+Degree: {{ .Degree.en }}
+Grade: {{ .Grade.en }}
+Distinctions:
+{{- range .Distinctions }}
+  - {{ .en }}
+{{- end }}
+Details: {{ .Body.en }}
+
+{{ end }}
+
+*** EXPERIENCE ***
+{{ range .Experiences }}
+Role: {{ .Role.en }}
+Company: {{ .Company.en }}
+Location: {{ .Location.en }}
+Link: {{ .Link }}
+Details: {{ .Body.en }}
+
+{{ end }}
+
+*** PROJECTS ***
+{{ range .Projects }}
+Title: {{ .Title.en }}
+Location: {{ .Location.en }}
+Link: {{ .Link }}
+Tools:
+{{- range .Tools }}
+  - {{ .en }}
+{{- end }}
+Details: {{ .Body.en }}
+
+{{ end }}

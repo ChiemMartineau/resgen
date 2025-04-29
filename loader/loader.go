@@ -11,6 +11,17 @@ type Config struct {
 }
 type ctxConfigKey struct{}
 
+type Education struct {
+	Start        Date              `yaml:"start"`
+	End          Date              `yaml:"end"`
+	Location     LocalizedString   `yaml:"location"`
+	Institution  LocalizedString   `yaml:"institution"`
+	Degree       LocalizedString   `yaml:"degree"`
+	Grade        LocalizedString   `yaml:"grade"`
+	Distinctions []LocalizedString `yaml:"distinctions"`
+	Body         LocalizedString
+}
+
 type Experience struct {
 	Start    Date            `yaml:"start"`
 	End      Date            `yaml:"end"`
@@ -19,17 +30,6 @@ type Experience struct {
 	Role     LocalizedString `yaml:"role"`
 	Company  LocalizedString `yaml:"company"`
 	Body     LocalizedString
-}
-
-type Education struct {
-	Start        Date              `yaml:"start"`
-	End          Date              `yaml:"end"`
-	Location     LocalizedString   `yaml:"location"`
-	Institution  LocalizedString   `yaml:"institution"`
-	Program      LocalizedString   `yaml:"program"`
-	Grade        LocalizedString   `yaml:"grade"`
-	Distinctions []LocalizedString `yaml:"distinctions"`
-	Body         LocalizedString
 }
 
 type Project struct {

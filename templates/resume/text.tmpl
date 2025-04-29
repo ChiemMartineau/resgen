@@ -1,0 +1,20 @@
+*** EDUCATION ***
+{{ range .Education }}
+{{ .Institution.en }} ({{ .Start }} - {{ .End }}) ({{ .Location.en}})
+- {{ .Degree.en }} - {{ .Grade.en }}
+{{ end }}
+
+*** EXPERIENCE ***
+{{ range .Experiences }}
+{{ .Role.en }} ({{ .Start }} - {{ .End }}) ({{ .Location.en}})
+{{ .Company.en }} ({{ .Location }}) ({{ .Link }})
+{{ .Body.en }}
+{{ end }}
+
+*** PROJECTS ***
+{{ range .Projects }}
+{{ .Title.en }} ({{ .Start }} - {{ .End }}) ({{ .Location.en}})
+Link: {{ .Link }}
+Tools: {{ range .Tools }}{{ .en }} {{ end }}
+{{ .Body.en }}
+{{ end }}
