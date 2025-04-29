@@ -8,16 +8,14 @@ import (
 	"github.com/goccy/go-yaml/ast"
 )
 
-type ctxDateFormatKey struct{}
-
 type Date time.Time
 
 func (d *Date) UnmarshalYAML(ctx context.Context, node ast.Node) error {
-	dateFormat := ctx.Value(ctxDateFormatKey{}).(string)
+	config := ctx.Value(ctxConfigKey{}).(*Config)
 
 	switch node := node.(type) {
 	case *ast.StringNode:
-		parsed, err := time.Parse(dateFormat, node.Value)
+		parsed, err := time.Parse(config.DateFormat, node.Value)
 		if err != nil {
 			return &yaml.SyntaxError{
 				Token:   node.GetToken(),

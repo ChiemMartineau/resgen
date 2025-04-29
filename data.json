@@ -1,0 +1,90 @@
+{
+  "Experiences": [
+    {
+      "Start": {},
+      "End": {},
+      "Location": {
+        "en": "Montreal",
+        "fr": "Montreal"
+      },
+      "Link": "https://smartineau.me",
+      "Role": {
+        "en": "In French",
+        "fr": "En anglais"
+      },
+      "Company": {
+        "en": "Sycorax",
+        "fr": "Sycorax"
+      },
+      "Body": {
+        "en": "ABC",
+        "fr": "DEF"
+      }
+    }
+  ],
+  "Education": [
+    {
+      "Start": {},
+      "End": {},
+      "Location": {
+        "en": "Montreal",
+        "fr": "Montreal"
+      },
+      "Institution": {
+        "en": "Non Localized String",
+        "fr": "Non Localized String"
+      },
+      "Program": {
+        "en": "In French",
+        "fr": "En anglais"
+      },
+      "Grade": {
+        "en": "100%",
+        "fr": "100%"
+      },
+      "Distinctions": [
+        {
+          "en": "In French",
+          "fr": "En anglais"
+        },
+        {
+          "en": "In French",
+          "fr": "En anglais"
+        }
+      ],
+      "Body": {
+        "en": "ABC",
+        "fr": "DEF"
+      }
+    }
+  ],
+  "Projects": [
+    {
+      "Start": {},
+      "End": {},
+      "Location": {
+        "en": "Montreal",
+        "fr": "Montreal"
+      },
+      "Link": "https://smartineau.me",
+      "Title": {
+        "en": "In French",
+        "fr": "En anglais"
+      },
+      "Tools": [
+        {
+          "en": "In French",
+          "fr": "En anglais"
+        },
+        {
+          "en": "In French",
+          "fr": "En anglais"
+        }
+      ],
+      "Body": {
+        "en": "ABC",
+        "fr": "DEF"
+      }
+    }
+  ]
+}

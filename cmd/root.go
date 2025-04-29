@@ -17,15 +17,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 	"path/filepath"
 
 	"github.com/ChiemMartineau/resgen/loader"
-	"github.com/goccy/go-yaml/printer"
+	"github.com/ChiemMartineau/resgen/utils"
 	"github.com/spf13/cobra"
-	"golang.org/x/term"
 )
 
 var rootCmd = &cobra.Command{
@@ -39,17 +39,20 @@ var rootCmd = &cobra.Command{
 		}
 
 		rootPath, err := filepath.Abs(rootPath)
-
 		if err != nil {
-			log.Fatal(SmartFormatError(err))
+			log.Fatal(utils.SmartFormatError(err))
 		}
 
 		data, err := loader.LoadData(rootPath)
 		if err != nil {
-			log.Fatal(SmartFormatError(err))
+			log.Fatal(utils.SmartFormatError(err))
 		}
 
-		fmt.Printf("%#v\n", data)
+		json, err := json.MarshalIndent(data, "", "\t")
+		if err != nil {
+			log.Fatal(utils.SmartFormatError(err))
+		}
+		fmt.Printf("%s\n", json)
 	},
 }
 
@@ -61,24 +64,5 @@ func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
-	}
-}
-
-func SmartFormatError(err error) string {
-	if term.IsTerminal(int(os.Stderr.Fd())) {
-		return PrettyFormatError(err)
-	} else {
-		return err.Error()
-	}
-}
-
-func PrettyFormatError(err error) string {
-	switch err := err.(type) {
-	case loader.YamlError:
-		var pp printer.Printer
-		src := pp.PrintErrorToken(err.YamlError.GetToken(), true)
-		return fmt.Sprintf("%s%s%s\n%s", ColourRedBold, err.Error(), ColourReset, src)
-	default:
-		return fmt.Sprintf("%s%s%s", ColourRedBold, err.Error(), ColourReset)
 	}
 }

@@ -8,8 +8,6 @@ import (
 	"github.com/goccy/go-yaml/ast"
 )
 
-type ctxLanguagesKey struct{}
-
 type LocalizedString map[string]string
 
 func NewLocalizedStringFomString(langs []string, value string) LocalizedString {
@@ -32,7 +30,8 @@ func NewLocalizedStringFromSlice(langs []string, values []string) (LocalizedStri
 }
 
 func (s *LocalizedString) UnmarshalYAML(ctx context.Context, node ast.Node) error {
-	langs := ctx.Value(ctxLanguagesKey{}).([]string)
+	config := ctx.Value(ctxConfigKey{}).(*Config)
+	langs := config.Languages
 
 	switch n := node.(type) {
 	case *ast.StringNode:

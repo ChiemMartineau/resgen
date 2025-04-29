@@ -1,0 +1,2 @@
+unable to read YAML at /Users/dangkhoachiem/Desktop/Projects/resgen/example/education/bsc.md:2:8: mapping value is not allowed in this context
+exit status 1

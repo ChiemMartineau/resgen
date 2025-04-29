@@ -1,4 +1,4 @@
-package cmd
+package utils
 
 type Colour string
 

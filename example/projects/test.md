@@ -2,12 +2,11 @@
 start: 2006-01-05
 end: 2024-12-04
 location: Montreal
-institution: Non Localized String
-program:
+link: https://smartineau.me
+title:
   - In French
   - En anglais
-grade: 100%
-distinctions:
+tools:
   - - In French
     - En anglais
   - - In French
